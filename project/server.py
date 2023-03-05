@@ -23,6 +23,7 @@ def create_app(config_obj):
     api.add_namespace(auth_ns)
     api.add_namespace(user_ns)
     api.add_namespace(genres_ns)
+    # api.add_namespace(movies_ns)
 
     app.register_error_handler(BaseServiceError, base_service_error_handler)
 

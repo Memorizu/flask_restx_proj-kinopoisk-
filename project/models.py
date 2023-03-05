@@ -1,4 +1,5 @@
-from sqlalchemy import Column, String, Integer, Float
+from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
 
 from project.setup.db import models
 
@@ -17,14 +18,16 @@ class Movie(models.Base):
     trailer = Column(String())
     year = Column(Integer())
     rating = Column(Float())
-    genre_id = Column(Integer())
-    director_id = Column(Integer())
+    genre_id = Column(Integer(), ForeignKey('genres.id'))
+    genre = relationship('Genre')
+    director_id = Column(Integer(), ForeignKey('directors.id'))
+    director = relationship('Director')
 
 
 class Director(models.Base):
     __tablename__ = 'directors'
 
-    name = Column(String(), unique=True, nullable=False)
+    name = Column(String(200), unique=True, nullable=False)
 
 
 class User(models.Base):
