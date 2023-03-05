@@ -11,3 +11,8 @@ def shell():
         "db": db,
         "Genre": Genre,
     }
+
+
+if __name__ == '__main__':
+    app.run()
+
