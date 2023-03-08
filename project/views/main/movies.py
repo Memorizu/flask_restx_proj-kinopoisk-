@@ -2,8 +2,7 @@ from flask_restx import Namespace, Resource
 
 from project.container import movie_service
 from project.setup.api.models import movie
-from project.setup.api.parsers import page_parser
-
+from project.setup.api.parsers import page_parser, status_parser
 
 api = Namespace('movies')
 
@@ -16,7 +15,7 @@ class MovieView(Resource):
         """
         Get all movies
         """
-        return movie_service.get_all(**page_parser.parse_args())
+        return movie_service.get_all(**status_parser.parse_args(), **page_parser.parse_args())
 
 
 @api.route('/<int:movie_id>/')

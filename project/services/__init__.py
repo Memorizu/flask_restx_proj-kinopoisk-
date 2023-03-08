@@ -1,3 +1,5 @@
 from .genres_service import GenresService
+from .movie_service import MovieService
+from .director_service import DirectorService
 
-__all__ = ["GenresService"]
+__all__ = ["GenresService", "MovieService", "DirectorService", "AuthService"]
