@@ -19,12 +19,4 @@ class UserService:
         self.dao.db_session.add(new_user)
         self.dao.db_session.commit()
 
-    def generate_password(self, password):
-        hash_password = hashlib.pbkdf2_hmac(
-            'sha256',
-            password.encode('utf-8'),
-            BaseConfig.PWD_HASH_SALT,
-            BaseConfig.PWD_HASH_ITERATIONS
-        )
 
-        return base64.b64encode(hash_password)
