@@ -1,3 +1,4 @@
+from flask import request
 from flask_restx import Namespace, Resource
 
 from project.container import user_service
@@ -12,11 +13,12 @@ api = Namespace('user')
 class UserView(Resource):
 
     @auth_required
-    def get(self, user_id: int) -> User:
-        return user_service.get_one(user_id)
+    def get(self) -> User:
+        token = request.headers['Authorization'].split('Bearer ')[:-1]
+        return user_service.get_by_token(token)
 
     @auth_required
-    def patch(self, user_id: int) -> User:
+    def patch(self) -> User:
         pass
 
 

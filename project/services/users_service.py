@@ -1,6 +1,6 @@
+from project.config import BaseConfig
 from project.dao.main import UserDAO
-from project.dao.base import BaseDAO
-from project.models import User
+import jwt
 
 
 class UserService:
@@ -12,10 +12,12 @@ class UserService:
         return user
 
     def create(self, data: dict):
-        new_user = User(**data)
-        self.dao.db_session.add(new_user)
-        self.dao.db_session.commit()
+        return self.dao.create(data)
 
     def get_by_email(self, email):
         user = self.dao.get_by_email(email)
         return user
+
+    def get_by_token(self, token: bytes):
+        user = jwt.decode(token, key=BaseConfig.SECRET_KEY, algorithms=BaseConfig.ALGO)
+        return self.dao.get_by_email_for_auth(user['email'])

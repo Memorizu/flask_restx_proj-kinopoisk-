@@ -38,5 +38,14 @@ class MoviesDAO(BaseDAO[Movie]):
 class UserDAO(BaseDAO[User]):
     __model__ = User
 
+    def create(self, data: dict):
+        new_user = User(**data)
+        self.db_session.add(new_user)
+        self.db_session.commit()
+
     def get_by_email(self, email: str):
         return self.db_session.query(User).filter(User.email == email).first()
+
+    def get_by_email_for_auth(self, email: str):
+        return self.db_session.query(User.id, User.email, User.password,
+                                     User.name, User.surname, User.favorite_genre).filter(User.email == email)

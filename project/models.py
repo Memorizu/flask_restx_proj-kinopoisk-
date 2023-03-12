@@ -30,6 +30,15 @@ class Director(models.Base):
     name = Column(String(200), unique=True, nullable=False)
 
 
+class Favorite(models.Base):
+    __tablename__ = 'favorites'
+
+    user_id = Column(Integer(), ForeignKey('users.id'), nullable=False)
+    user = relationship('User')
+    movie_id = Column(Integer(), ForeignKey('movies.id'), nullable=False)
+    movie = relationship('Movie')
+
+
 class User(models.Base):
     __tablename__ = 'users'
 
@@ -37,5 +46,6 @@ class User(models.Base):
     password = Column(String(), nullable=False)
     name = Column(String(150))
     surname = Column(String(200))
-    favorite_genre = Column(String())
+    favorite_genre = Column(Integer(), ForeignKey('movies.id'))
+    favorite = relationship('Movie')
 
