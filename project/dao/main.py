@@ -19,22 +19,24 @@ class DirectorsDAO(BaseDAO[Director]):
 class MoviesDAO(BaseDAO[Movie]):
     __model__ = Movie
 
-    def get_all(self, status: Optional[str] = None,
-                page: Optional[int] = None):
-        super().get_all()
-        stmt = self._db_session.query(self.__model__)
+    def get_all_by_status(self, status: Optional[str] = None,
+                          page: Optional[int] = None):
+        stmt = self._db_session.query(Movie)
+        if status:
+            if status == 'new':
+                stmt = stmt.order_by(-Movie.year)
+
         if page:
             try:
-                return BaseDAO.get_all(self, page)
+                return stmt.paginate(page, self._items_per_page).items
             except NotFound:
                 return []
-        if status:
-            try:
-                return self._db_session.query(self.__model__).order_by(-self.__model__.year).all()
-            except NotFound:
-                return []
+
         return stmt.all()
 
 
 class UserDAO(BaseDAO[User]):
     __model__ = User
+
+    def get_by_email(self, email: str):
+        return self.db_session.query(User).filter(User.email == email).first()

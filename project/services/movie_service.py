@@ -11,7 +11,7 @@ class MovieService:
         self.dao = dao
 
     def get_all(self, status: Optional[str] = None, page: Optional[int] = None) -> list[Movie]:
-        return self.dao.get_all(status=status, page=page)
+        return self.dao.get_all_by_status(status=status, page=page)
 
     def get_one(self, pk: int) -> Movie:
         if movie := self.dao.get_by_id(pk):

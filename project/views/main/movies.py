@@ -9,7 +9,7 @@ api = Namespace('movies')
 
 @api.route('/')
 class MovieView(Resource):
-    @api.expect(page_parser)
+    @api.expect(page_parser, status_parser)
     @api.marshal_with(movie, as_list=True, code=200, description='OK')
     def get(self):
         """
