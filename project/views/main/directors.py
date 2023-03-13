@@ -15,7 +15,7 @@ class DirectorView(Resource):
         return director_service.get_all(**page_parser.parse_args())
 
 
-@api.route('/<int:director_id>')
+@api.route('/<int:director_id>/')
 class DirectorView(Resource):
     @api.response(404, 'Not Found')
     @api.marshal_with(director, code=200, description='ok')

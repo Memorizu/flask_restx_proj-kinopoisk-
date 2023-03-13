@@ -7,7 +7,7 @@ from project.container import auth_service
 api = Namespace('auth')
 
 
-@api.route('/register')
+@api.route('/register/')
 class AuthView(Resource):
 
     def post(self):
@@ -21,9 +21,8 @@ class AuthView(Resource):
         return auth_service.create(data)
 
 
-@api.route('/login')
+@api.route('/login/')
 class AuthView(Resource):
-
 
     def post(self):
         data = request.json

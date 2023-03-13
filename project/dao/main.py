@@ -44,8 +44,12 @@ class UserDAO(BaseDAO[User]):
         self.db_session.commit()
 
     def get_by_email(self, email: str):
-        return self.db_session.query(User).filter(User.email == email).first()
+        user = self.db_session.query(User).filter(User.email == email).first()
+        return user
 
-    def get_by_email_for_auth(self, email: str):
-        return self.db_session.query(User.id, User.email, User.password,
-                                     User.name, User.surname, User.favorite_genre).filter(User.email == email)
+    def update(self, user: dict):
+        self.db_session.add(user)
+        self.db_session.commit()
+        return user
+
+

@@ -37,10 +37,10 @@ def auth_required(func):
             abort(401)
 
         data = request.headers['Authorization']
-        token = data.split('Bearer ')[:-1]
+        token = data.split('Bearer ')[-1]
 
         try:
-            jwt.decode(token, BaseConfig.SECRET_KEY, algorithms=[BaseConfig.ALGO])
+            jwt.decode(token, key=BaseConfig.SECRET_KEY, algorithms=[BaseConfig.ALGO])
         except Exception as e:
             print('JWT Decode Exception', e)
             abort(401)

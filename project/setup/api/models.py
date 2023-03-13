@@ -27,10 +27,11 @@ movie: Model = api.model('Фильм', {
 user: Model = api.model('Пользователь', {
     'id': fields.Integer(required=True),
     'email': fields.String(required=True),
-    'password': fields.String(required=True),
+    'password': fields.String(required=True, load_only=True),
     'name': fields.String(),
     'surname': fields.String(),
-    'favorite_genre': fields.Integer()
+    'favorite_genre': fields.Integer(),
+    'favorite_movie': fields.Integer()
 })
 
 favorite: Model = api.model('Любимый фильм', {
