@@ -1,5 +1,5 @@
 from project.config import config
-from project.models import Genre, Movie, Director, User
+from project.models import Genre, Movie, Director, User, Favorite
 from project.server import create_app, db
 
 app = create_app(config)
@@ -12,7 +12,8 @@ def shell():
         "Genre": Genre,
         "Movie": Movie,
         "Director": Director,
-        "User": User
+        "User": User,
+        "Favorites": Favorite
     }
 
 

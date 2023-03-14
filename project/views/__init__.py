@@ -1,5 +1,5 @@
 from .auth import auth_ns, user_ns
-from .main import genres_ns, movies_ns, directors_ns
+from .main import genres_ns, movies_ns, directors_ns, favorites_ns
 
 
 __all__ = [
@@ -7,5 +7,6 @@ __all__ = [
     'genres_ns',
     'user_ns',
     'movies_ns',
-    'directors_ns'
+    'directors_ns',
+    'favorites_ns'
 ]
