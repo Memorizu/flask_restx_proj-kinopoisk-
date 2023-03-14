@@ -17,6 +17,10 @@ class UserView(Resource):
     @api.response(404, 'Not Found')
     @api.marshal_with(user, code=200, description='OK')
     def get(self) -> User:
+        """
+        get user by token
+        :return: User object
+        """
         token = request.headers['Authorization'].split('Bearer ')[-1]
         return user_service.get_by_token(token)
 
@@ -24,6 +28,10 @@ class UserView(Resource):
     @api.response(404, 'Not Found')
     @api.marshal_with(user, code=200, description='OK')
     def patch(self) -> User:
+        """
+        updating User object
+        :return: USer
+        """
         token = request.headers['Authorization'].split('Bearer ')[-1]
         data = request.json
         return user_service.update(token, data)
@@ -34,8 +42,12 @@ class UserView(Resource):
 
     @auth_required
     @api.response(404, 'Not Found')
-    @api.marshal_with(user, code=200, description='OK')
+    @api.marshal_with(user, code=200, description='Update Password')
     def put(self):
+        """
+        Update user password
+        :return:
+        """
         token = request.headers['Authorization'].split('Bearer ')[-1]
         data = request.json
         return user_service.update_password(token, data)

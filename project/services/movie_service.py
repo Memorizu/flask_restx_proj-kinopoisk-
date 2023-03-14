@@ -1,7 +1,5 @@
 from typing import Optional
-
 from project.dao import MoviesDAO
-from project.dao.base import BaseDAO
 from project.exceptions import ItemNotFound
 from project.models import Movie
 
@@ -17,5 +15,3 @@ class MovieService:
         if movie := self.dao.get_by_id(pk):
             return movie
         raise ItemNotFound(f'Фильма с pk {pk} не существует')
-
-

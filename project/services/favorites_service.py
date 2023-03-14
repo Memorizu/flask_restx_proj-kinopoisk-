@@ -1,9 +1,6 @@
 import jwt
-
 from project.config import BaseConfig
-from project.dao import UserDAO
 from project.dao.favorite import FavoriteDAO
-from project.tools.security import auth_required
 
 
 class FavoriteService:

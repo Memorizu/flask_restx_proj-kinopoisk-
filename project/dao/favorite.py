@@ -16,4 +16,3 @@ class FavoriteDAO(BaseDAO):
         movie = self.db_session.query(Favorite).filter(Favorite.movie_id == movie_id).first()
         self.db_session.delete(movie)
         self.db_session.commit()
-

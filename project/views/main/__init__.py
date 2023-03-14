@@ -4,6 +4,7 @@ from .directors import api as directors_ns
 from .favorites import api as favorites_ns
 
 
+# register namespaces
 __all__ = [
     'genres_ns',
     'movies_ns',

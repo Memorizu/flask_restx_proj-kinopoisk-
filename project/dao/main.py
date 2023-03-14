@@ -21,6 +21,12 @@ class MoviesDAO(BaseDAO[Movie]):
 
     def get_all_by_status(self, status: Optional[str] = None,
                           page: Optional[int] = None):
+        """
+        get all movies, Optionally can be argument status and page
+        :param status: str
+        :param page: int
+        :return: all movies
+        """
         stmt = self._db_session.query(Movie)
         if status:
             if status == 'new':

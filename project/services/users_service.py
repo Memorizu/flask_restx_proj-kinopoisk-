@@ -1,9 +1,9 @@
 from flask_restx import abort
-
 from project.config import BaseConfig
 from project.dao.main import UserDAO
 import jwt
 from project.tools.security import generate_password_hash
+
 
 class UserService:
     def __init__(self, dao: UserDAO):
@@ -40,6 +40,9 @@ class UserService:
         return self.dao.update(user)
 
     def update_password(self, token, data):
+        """
+        Update user password
+        """
         user = self.get_by_token(token)
         old_password = data.get('old_password')
         new_password = data.get('new_password')

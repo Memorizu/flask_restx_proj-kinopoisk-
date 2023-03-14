@@ -12,8 +12,12 @@ api = Namespace('favorites')
 class FavoriteView(Resource):
 
     @auth_required
-    @api.marshal_with(favorite)
+    @api.marshal_with(favorite, as_list=True, description='get all movies')
     def get(self):
+        """
+        get all
+
+        """
         return favorite_service.get_all()
 
 
@@ -23,11 +27,20 @@ class FavoriteView(Resource):
     @auth_required
     @api.marshal_with(favorite, code=200, description='movie added')
     def post(self, movie_id: int):
+        """
+        Create new favorite movie in db
+        :param movie_id:
+        :return:
+        """
         token = request.headers['Authorization'].split('Bearer ')[-1]
         return favorite_service.add_movie(movie_id, token)
 
     @auth_required
     @api.marshal_with(favorite, code=204, description='movie deleted')
     def delete(self, movie_id: int):
-        favorite_service.delete(movie_id)
-        return ''
+        """
+        Delete movie_id from table
+        :param movie_id: int
+        :return: None
+        """
+        return favorite_service.delete(movie_id)

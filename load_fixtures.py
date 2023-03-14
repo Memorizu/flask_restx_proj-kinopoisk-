@@ -11,6 +11,9 @@ from project.utils import read_json
 
 
 def load_data(data: List[Dict[str, Any]], model: Type[models.Base]) -> None:
+    """
+    load data to data base
+    """
     for item in data:
         item['id'] = item.pop('pk')
         db.session.add(model(**item))
@@ -22,7 +25,6 @@ if __name__ == '__main__':
     app = create_app(config)
 
     with app.app_context():
-        # TODO: [fixtures] Добавить модели Directors и Movies
         load_data(fixtures['movies'], Movie)
         load_data(fixtures['genres'], Genre)
         load_data(fixtures['directors'], Director)

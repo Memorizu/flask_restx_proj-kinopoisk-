@@ -12,11 +12,22 @@ class AuthService:
         self.user_service = user_service
 
     def create(self, data: dict):
+        """
+        hashing user password and add to db
+        :param data: dict
+        :return: new User
+        """
         data['password'] = generate_password_hash(data['password'])
         return self.user_service.create(data)
 
     def create_token(self, email, password, is_refresh=False):
-
+        """
+        creating tokens from user email and password
+        :param email: str
+        :param password: str
+        :param is_refresh: boolean
+        :return: access and refresh tokens
+        """
         user = self.user_service.get_by_email(email)
         if user is None:
             raise abort(404)
@@ -29,7 +40,7 @@ class AuthService:
             'email': user.email,
             'password': user.password
         }
-
+        # Create 2 tokens for registration
         min30 = datetime.datetime.utcnow() + datetime.timedelta(minutes=BaseConfig.TOKEN_EXPIRE_MINUTES)
         data['exp'] = calendar.timegm(min30.timetuple())
         access_token = jwt.encode(data, BaseConfig.SECRET_KEY, algorithm=BaseConfig.ALGO)
@@ -41,8 +52,9 @@ class AuthService:
         return {'access_token': access_token, 'refresh_token': refresh_token}
 
     def approve_token(self, refresh_token):
-
+        """
+        approve token, if its ok, getting new tokens
+        """
         data = jwt.decode(jwt=refresh_token, key=BaseConfig.SECRET_KEY, algorithms=BaseConfig.ALGO )
         email = data.get('email')
         return self.create_token(email, None, is_refresh=True)
-

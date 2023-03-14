@@ -4,6 +4,9 @@ from project.setup.db import db
 
 
 class Base(db.Model):
+    """
+    Base Model
+    """
     __abstract__ = True
 
     id = Column(Integer, primary_key=True, autoincrement=True)
