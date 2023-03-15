@@ -1,4 +1,4 @@
-from flask_restx import Namespace, Resource
+from flask_restx import Namespace, Resource, abort
 
 from project.container import genre_service
 from project.setup.api.models import genre
@@ -15,7 +15,7 @@ class GenresView(Resource):
         """
         Get all genres.
         """
-        return genre_service.get_all(**page_parser.parse_args())
+        return genre_service.get_all(**page_parser.parse_args()), 200
 
 
 @api.route('/<int:genre_id>/')
@@ -26,4 +26,7 @@ class GenreView(Resource):
         """
         Get genre by id.
         """
-        return genre_service.get_by_id(genre_id)
+        g = genre_service.get_by_id(genre_id)
+        if not g:
+            abort(404)
+        return g, 200

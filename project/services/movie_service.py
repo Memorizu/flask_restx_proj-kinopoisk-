@@ -17,4 +17,4 @@ class MovieService:
         raise ItemNotFound(f'Фильма с pk {pk} не существует')
 
     def get_by_id(self, pk: int):
-        return self.dao.get_Object_by_pk(pk)
+        return self.dao.get_object_by_pk(pk)

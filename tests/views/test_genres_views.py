@@ -31,5 +31,5 @@ class TestGenresView:
         assert response.json == {"id": genre.id, "name": genre.name}
 
     def test_genre_not_found(self, client, genre):
-        response = client.get("/genres/2/")
+        response = client.get("/genres/45456/")
         assert response.status_code == 404

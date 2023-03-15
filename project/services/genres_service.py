@@ -18,4 +18,4 @@ class GenresService:
         return self.dao.get_all(page=page)
 
     def get_by_id(self, pk: int):
-        return self.dao.get_Object_by_pk(pk)
+        return self.dao.get_object_by_pk(pk)
