@@ -32,6 +32,10 @@ class BaseDAO(Generic[T]):
 
         return stmt.all()
 
+    def get_Object_by_pk(self, pk: int):
+        obj = self._db_session.query(self.__model__).filter(self.__model__.id == pk).first()
+        return obj
+
     @property
     def db_session(self):
         return self._db_session

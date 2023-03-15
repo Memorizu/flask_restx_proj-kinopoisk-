@@ -16,3 +16,6 @@ class GenresService:
 
     def get_all(self, page: Optional[int] = None) -> list[Genre]:
         return self.dao.get_all(page=page)
+
+    def get_by_id(self, pk: int):
+        return self.dao.get_Object_by_pk(pk)

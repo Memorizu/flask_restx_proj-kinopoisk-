@@ -26,4 +26,4 @@ class MovieView(Resource):
         """
         Get one movie by pk
         """
-        return movie_service.get_one(movie_id)
+        return movie_service.get_by_id(movie_id)
